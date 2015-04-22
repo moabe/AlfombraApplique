@@ -49,8 +49,20 @@ public class MainActivity extends Activity {
 
     public static final String TAG = "NfcDemo";
 
+
+    public static final String BUG_TAG = "Bug insect hej";
+
+
     private TextView mTextView;
+
+    private TextView bTextView;
+
     private NfcAdapter mNfcAdapter;
+
+
+    private String bugName;
+
+
 
     //TextView tvIsConnected;
     //EditText etResponse;//for http request
@@ -72,6 +84,10 @@ public class MainActivity extends Activity {
 
         mTextView = (TextView) findViewById(R.id.hello_id);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
+        bTextView = (TextView) findViewById(R.id.bug_id);
+
+
 
 
 
@@ -248,9 +264,184 @@ public class MainActivity extends Activity {
             if (result != null) {
                 mTextView.setText("Read content: " + result);
 
+                if(result.equals("greenBeetle")){
+                    bTextView.setText("Bug:" + result);
+                    bTextView.setBackgroundColor(Color.parseColor("#99DB9F"));
+                    bugName = result;
+                }
+
+
+                if(result.equals("redBeetle")){
+                    bTextView.setText("Bug:" + result);
+                    bTextView.setBackgroundColor(Color.parseColor("#ff0000"));
+                    bugName = result;
+                }
+
+
+                if(result.equals("anotherAnt")){
+                    bTextView.setText("Bug:" + result);
+                    bTextView.setBackgroundColor(Color.parseColor("#0F9F00"));
+
+                    Log.d(BUG_TAG,result );
+
+                    bugName = result;
+                }
+
+
+                if(result.equals("ant")){
+                    bTextView.setText("Bug:" + result);
+                    bTextView.setBackgroundColor(Color.parseColor("#A6D3DD"));
+
+                    Log.d(BUG_TAG,result );
+
+                    bugName = result;
+                }
+
+
+
+                //row1
+
+                if(result.equals("11")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/11" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("12")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/12" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("13")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/13" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("14")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/14" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("15")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/15" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+
+                //row2
+
+
+                if(result.equals("21")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/21" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("22")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/22" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("23")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/23" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("24")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/24" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+                if(result.equals("25")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/25" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+
+
+
+                //row3
+                if(result.equals("31")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/31" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+
+                    bugName = "";
+                }
+
+                if(result.equals("32")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/32" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+                if(result.equals("33")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/33" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    bugName = "";
+                }
+
+
+                if(result.equals("34")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/34" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+
+                    bugName = "";
+                }
+
+
+                if(result.equals("35")){
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/35" + "?bug=" + bugName +"&name=kalle");
+
+                    bTextView.setText("Bug:");
+                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+
+                    bugName = "";
+                }
+
+
+
+
                 if (result.equals("green")){
                     mTextView.setBackgroundColor(Color.parseColor("#99DB9F"));
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/tag/green");
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/tag/green" + "?action=move_forward&name=kalle");
                 }
                 if (result.equals("pink")){
                     mTextView.setBackgroundColor(Color.parseColor("#EDC8CE"));
