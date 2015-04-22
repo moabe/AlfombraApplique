@@ -1,7 +1,11 @@
 package com.example.moabergsmark.alfombraapplique;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -32,6 +36,7 @@ import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +66,11 @@ public class MainActivity extends Activity {
 
     private NfcAdapter mNfcAdapter;
 
+    private ImageView mBugImage;
+    private ImageView mBehaveImage;
+
+
+
 
     private String bugName;
     private String behaviour;
@@ -80,8 +90,25 @@ public class MainActivity extends Activity {
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         setContentView(R.layout.activity_main);
+
+
+
+    /* adapt the image to the size of the display */
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
+                getResources(), R.drawable.background),size.x,size.y,true);
+
+    /* fill the background ImageView with the resized image */
+        ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
+        iv_background.setImageBitmap(bmp);
+
+
+
+
+
 
 
 
@@ -90,6 +117,9 @@ public class MainActivity extends Activity {
 
         bTextView = (TextView) findViewById(R.id.bug_id);
         beTextView = (TextView) findViewById(R.id.behav_id);
+
+        mBugImage = (ImageView) findViewById(R.id.bug_image_id);
+        mBehaveImage = (ImageView) findViewById(R.id.behave_image);
 
 
 
@@ -273,22 +303,23 @@ public class MainActivity extends Activity {
                 //some bugs
 
                 if(result.equals("greenBeetle")){
-                    bTextView.setText("Bug:" + result);
-                    bTextView.setBackgroundColor(Color.parseColor("#99DB9F"));
+
+                    mBugImage.setImageResource(R.drawable.beetlegreen);
+
                     bugName = result;
                 }
 
 
                 if(result.equals("redBeetle")){
-                    bTextView.setText("Bug:" + result);
-                    bTextView.setBackgroundColor(Color.parseColor("#ff0000"));
+                    mBugImage.setImageResource(R.drawable.beetlered);
+
                     bugName = result;
                 }
 
 
                 if(result.equals("anotherAnt")){
-                    bTextView.setText("Bug:" + result);
-                    bTextView.setBackgroundColor(Color.parseColor("#0F9F00"));
+
+                    mBugImage.setImageResource(R.drawable.anotherant);
 
 
                     bugName = result;
@@ -296,8 +327,9 @@ public class MainActivity extends Activity {
 
 
                 if(result.equals("ant")){
-                    bTextView.setText("Bug:" + result);
-                    bTextView.setBackgroundColor(Color.parseColor("#A6D3DD"));
+
+
+                    mBugImage.setImageResource(R.drawable.ant);
 
 
                     bugName = result;
@@ -307,8 +339,7 @@ public class MainActivity extends Activity {
                 //behaviours
 
                 if(result.equals("upDown")){
-                    beTextView.setText("Behaviour:" + result);
-                    bTextView.setBackgroundColor(Color.parseColor("#007f00"));
+                    mBehaveImage.setImageResource(R.drawable.updown);
 
 
                     behaviour = result;
@@ -322,8 +353,8 @@ public class MainActivity extends Activity {
                 if(result.equals("11")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/11" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -331,8 +362,8 @@ public class MainActivity extends Activity {
                 if(result.equals("12")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/12" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -340,8 +371,8 @@ public class MainActivity extends Activity {
                 if(result.equals("13")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/13" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -349,8 +380,9 @@ public class MainActivity extends Activity {
                 if(result.equals("14")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/14" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -358,8 +390,9 @@ public class MainActivity extends Activity {
                 if(result.equals("15")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/15" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -371,8 +404,9 @@ public class MainActivity extends Activity {
                 if(result.equals("21")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/21" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -380,8 +414,9 @@ public class MainActivity extends Activity {
                 if(result.equals("22")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/22" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -389,8 +424,8 @@ public class MainActivity extends Activity {
                 if(result.equals("23")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/23" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -398,16 +433,18 @@ public class MainActivity extends Activity {
                 if(result.equals("24")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/24" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
                 if(result.equals("25")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/25" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -419,8 +456,8 @@ public class MainActivity extends Activity {
                 if(result.equals("31")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/31" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -428,8 +465,9 @@ public class MainActivity extends Activity {
                 if(result.equals("32")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/32" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -437,17 +475,20 @@ public class MainActivity extends Activity {
                 if(result.equals("33")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/33" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
+
+
                 }
 
                 if(result.equals("34")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/34" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
@@ -455,8 +496,8 @@ public class MainActivity extends Activity {
                 if(result.equals("35")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/35" + "?bug=" + bugName +"&behaviour=" + behaviour);
 
-                    bTextView.setText("Bug:");
-                    bTextView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBugImage.setImageDrawable(null);
+                    mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     behaviour="";
                 }
