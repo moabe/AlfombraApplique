@@ -73,8 +73,9 @@ public class MainActivity extends Activity {
 
 
     private String bugName;
-    private String behaviour;
+    //private String behaviour = "";
 
+    private StringBuilder behaviour = new StringBuilder("");
 
 
     //TextView tvIsConnected;
@@ -296,7 +297,7 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                mTextView.setText("Read content: " + result);
+                mTextView.setText("Read content: " + behaviour);
 
 
 
@@ -340,9 +341,17 @@ public class MainActivity extends Activity {
 
                 if(result.equals("upDown")){
                     mBehaveImage.setImageResource(R.drawable.updown);
+                    behaviour.append(result).append(",");
+                }
 
+                if(result.equals("rightLeft")){
+                    mBehaveImage.setImageResource(R.drawable.rightleft);
+                    behaviour.append(result).append(",");
+                }
 
-                    behaviour = result;
+                if(result.equals("circle")){
+                    mBehaveImage.setImageResource(R.drawable.circle);
+                    behaviour.append(result).append(",");
                 }
 
 
@@ -356,7 +365,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("12")){
@@ -365,26 +374,26 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("13")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/13" + "?bug=" + bugName +"&behaviour=" + behaviour);
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/13" + "?bug=" + bugName + "&behaviour=" + behaviour);
 
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("14")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/14" + "?bug=" + bugName +"&behaviour=" + behaviour);
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/14" + "?bug=" + bugName + "&behaviour=" + behaviour);
 
 
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("15")){
@@ -394,7 +403,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
 
@@ -408,7 +417,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("22")){
@@ -418,7 +427,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("23")){
@@ -427,7 +436,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("24")){
@@ -437,7 +446,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
                 if(result.equals("25")){
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/25" + "?bug=" + bugName +"&behaviour=" + behaviour);
@@ -446,7 +455,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
 
@@ -459,7 +468,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("32")){
@@ -469,7 +478,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("33")){
@@ -478,7 +487,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
 
 
                 }
@@ -490,7 +499,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
                 if(result.equals("35")){
@@ -499,7 +508,7 @@ public class MainActivity extends Activity {
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
-                    behaviour="";
+                    behaviour.setLength(0);
                 }
 
 
@@ -553,14 +562,14 @@ public class MainActivity extends Activity {
 
 
     // check network connection
-    public boolean isConnected(){
+    /*public boolean isConnected(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected())
             return true;
         else
             return false;
-    }
+    }*/
 
 
 
