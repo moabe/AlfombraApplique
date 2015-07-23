@@ -304,240 +304,59 @@ public class MainActivity extends Activity {
             if (result != null) {
                 mTextView.setText("Read content: " + behaviour);
 
-                //explode = "detfunkarej";
-
-
-                //some bugs
-
-                if(result.equals("greenBeetle")){
-
-                    mBugImage.setImageResource(R.drawable.beetlegreen);
-
-                    bugName = result;
-                }
-
-
-                if(result.equals("redBeetle")){
-                    mBugImage.setImageResource(R.drawable.beetlered);
-
-                    bugName = result;
-                }
-
-
-                if(result.equals("anotherAnt")){
-
-                    mBugImage.setImageResource(R.drawable.anotherant);
-
-
-                    bugName = result;
-                }
-
-
-                if(result.equals("ant")){
-
-
-                    mBugImage.setImageResource(R.drawable.ant);
-
-
-                    bugName = result;
-                }
-
-                if(result.equals("redBerry")){
-                    mBugImage.setImageResource(R.drawable.red);
-                    bugName = result;
-                }
-
-
-
-
-                if(result.equals("explode")){
-                    mBehaveImage.setImageResource(R.drawable.red);
-                    explode = result;
-                    //Log.d("explode result: ", explode);
-                }
-
-
-                //behaviours
-
-                if(result.equals("upDown")){
-                    mBehaveImage.setImageResource(R.drawable.updown);
-                    behaviour.append(result).append(",");
-                }
-
-                if(result.equals("rightLeft")){
-                    mBehaveImage.setImageResource(R.drawable.rightleft);
-                    behaviour.append(result).append(",");
-                }
-
-                if(result.equals("circle")){
-                    mBehaveImage.setImageResource(R.drawable.circle);
-                    behaviour.append(result).append(",");
-                }
-
-
-
-                //row1
-
-                if(result.equals("11")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/11" + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour );
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    explode = "";
-                    behaviour.setLength(0);
-                }
-                String numString = "1234567890";
-                if(result.matches("^-?\\d+$"))
+                if(result.matches("^-?\\d+$")) {
                     Log.d("string is int ", result );
-
-/*
-                if(result.equals("12")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/12" + "?bug=" + bugName +"&behaviour=" + behaviour+ "&exp" + explode);
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + result + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour );
 
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     explode = "";
                     behaviour.setLength(0);
+
                 }
-
-                if(result.equals("13")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/13" + "?bug=" + bugName + "&behaviour=" + behaviour);
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("14")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/14" + "?bug=" + bugName + "&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("15")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/15" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-
-                //row2
-
-
-                if(result.equals("21")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/21" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("22")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/22" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("23")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/23" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("24")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/24" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-                if(result.equals("25")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/25" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-
-
-
-                //row3
-                if(result.equals("31")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/31" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("32")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/32" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("33")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/33" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
+                else{
+                    switch (result) {
+                        case "greenBeetle":
+                            mBugImage.setImageResource(R.drawable.beetlegreen);
+                            bugName = result;
+                            break;
+                        case "redBeetle":
+                            mBugImage.setImageResource(R.drawable.beetlered);
+                            bugName = result;
+                            break;
+                        case "anotherAnt":
+                            mBugImage.setImageResource(R.drawable.anotherant);
+                            bugName = result;
+                            break;
+                        case "ant":
+                            mBugImage.setImageResource(R.drawable.ant);
+                            bugName = result;
+                            break;
+                        case "redBerry":
+                            mBugImage.setImageResource(R.drawable.red);
+                            bugName = result;
+                            break;
+                        case "explode":
+                            mBehaveImage.setImageResource(R.drawable.red);
+                            explode = result;
+                            break;
+                        case "upDown":
+                            mBehaveImage.setImageResource(R.drawable.updown);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "rightLeft":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "circle":
+                            mBehaveImage.setImageResource(R.drawable.circle);
+                            behaviour.append(result).append(",");
+                            break;
+                    }
 
 
                 }
-
-                if(result.equals("34")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/34" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-
-                if(result.equals("35")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/35" + "?bug=" + bugName +"&behaviour=" + behaviour);
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    behaviour.setLength(0);
-                }
-*/
-
-
             }
         }
     }
