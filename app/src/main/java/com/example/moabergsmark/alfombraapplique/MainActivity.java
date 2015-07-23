@@ -73,7 +73,11 @@ public class MainActivity extends Activity {
 
 
     private String bugName;
-    //private String behaviour = "";
+
+    private String explode;
+
+
+    // private String behaviour = "";
 
     private StringBuilder behaviour = new StringBuilder("");
 
@@ -296,9 +300,11 @@ public class MainActivity extends Activity {
         //super cool stuffs
         @Override
         protected void onPostExecute(String result) {
+
             if (result != null) {
                 mTextView.setText("Read content: " + behaviour);
 
+                //explode = "detfunkarej";
 
 
                 //some bugs
@@ -336,6 +342,20 @@ public class MainActivity extends Activity {
                     bugName = result;
                 }
 
+                if(result.equals("redBerry")){
+                    mBugImage.setImageResource(R.drawable.red);
+                    bugName = result;
+                }
+
+
+
+
+                if(result.equals("explode")){
+                    mBehaveImage.setImageResource(R.drawable.red);
+                    explode = result;
+                    //Log.d("explode result: ", explode);
+                }
+
 
                 //behaviours
 
@@ -356,24 +376,29 @@ public class MainActivity extends Activity {
 
 
 
-
                 //row1
 
                 if(result.equals("11")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/11" + "?bug=" + bugName +"&behaviour=" + behaviour);
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/11" + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour );
 
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
+                    explode = "";
                     behaviour.setLength(0);
                 }
+                String numString = "1234567890";
+                if(result.matches("^-?\\d+$"))
+                    Log.d("string is int ", result );
 
+/*
                 if(result.equals("12")){
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/12" + "?bug=" + bugName +"&behaviour=" + behaviour);
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/12" + "?bug=" + bugName +"&behaviour=" + behaviour+ "&exp" + explode);
 
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
+                    explode = "";
                     behaviour.setLength(0);
                 }
 
@@ -510,7 +535,7 @@ public class MainActivity extends Activity {
                     bugName = "";
                     behaviour.setLength(0);
                 }
-
+*/
 
 
             }
