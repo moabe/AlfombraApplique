@@ -302,10 +302,8 @@ public class MainActivity extends Activity {
         protected void onPostExecute(String result) {
 
             if (result != null) {
-                mTextView.setText("Read content: " + behaviour);
-
                 if(result.matches("^-?\\d+$")) {
-                    Log.d("string is int ", result );
+                    //Log.d("string is int ", result );
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + result + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour );
 
                     mBugImage.setImageDrawable(null);
@@ -353,7 +351,36 @@ public class MainActivity extends Activity {
                             mBehaveImage.setImageResource(R.drawable.circle);
                             behaviour.append(result).append(",");
                             break;
+                        case "up":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "down":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "right":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "left":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "lu":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "rd":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
+                        case "zigzag":
+                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            behaviour.append(result).append(",");
+                            break;
                     }
+                    mTextView.setText("Beteendelista: " + behaviour);
 
 
                 }
