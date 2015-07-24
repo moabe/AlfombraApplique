@@ -31,15 +31,18 @@
         android:background="#ffe5e5c0"
         android:textColor="#ffe5e5c0" />
 
-    <ImageView
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bug_image_id"
-        android:layout_below="@+id/behav_id"
+        android:layout_below="@id/behav_id"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="120dp"
-        android:layout_marginTop="200dp" />
+        android:layout_marginTop="200dp"
+        android:background = "@drawable/button"
+        android:scaleType="centerInside"
+        />
 
     <ImageView
         android:layout_width="wrap_content"

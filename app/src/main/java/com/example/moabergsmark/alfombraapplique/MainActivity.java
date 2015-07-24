@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
+
 
 
 
@@ -36,6 +39,7 @@ import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +50,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import static android.widget.Toast.*;
 
 
 public class MainActivity extends Activity {
@@ -66,7 +71,7 @@ public class MainActivity extends Activity {
 
     private NfcAdapter mNfcAdapter;
 
-    private ImageView mBugImage;
+    private ImageButton mBugImage;
     private ImageView mBehaveImage;
 
 
@@ -75,6 +80,11 @@ public class MainActivity extends Activity {
     private String bugName;
 
     private String explode;
+
+    private String bugState;
+
+
+    private String pos;
 
 
     // private String behaviour = "";
@@ -111,11 +121,13 @@ public class MainActivity extends Activity {
         iv_background.setImageBitmap(bmp);
 
 
+        //button
 
 
 
 
 
+        //views
 
         mTextView = (TextView) findViewById(R.id.hello_id);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -123,16 +135,16 @@ public class MainActivity extends Activity {
         bTextView = (TextView) findViewById(R.id.bug_id);
         beTextView = (TextView) findViewById(R.id.behav_id);
 
-        mBugImage = (ImageView) findViewById(R.id.bug_image_id);
+        mBugImage = (ImageButton) findViewById(R.id.bug_image_id);
         mBehaveImage = (ImageView) findViewById(R.id.behave_image);
 
 
 
-
+        //nfc stuff
 
         if (mNfcAdapter == null) {
             // Stop here, we definitely need NFC
-            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            makeText(this, "This device doesn't support NFC.", LENGTH_LONG).show();
             finish();
             return;
 
@@ -304,35 +316,45 @@ public class MainActivity extends Activity {
             if (result != null) {
                 if(result.matches("^-?\\d+$")) {
                     //Log.d("string is int ", result );
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + result + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour );
+                    bugState="preview";
+                    pos = result;
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + result + "?bug=" + bugName  + "&state=" + bugState );
+                    /*
+                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + result + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour + "&state=" + bugName );
 
                     mBugImage.setImageDrawable(null);
                     mBehaveImage.setImageDrawable(null);
                     bugName = "";
                     explode = "";
-                    behaviour.setLength(0);
+                    behaviour.setLength(0);*/
+
 
                 }
                 else{
                     switch (result) {
                         case "greenBeetle":
                             mBugImage.setImageResource(R.drawable.beetlegreen);
+                            addListenerOnButton();
                             bugName = result;
                             break;
                         case "redBeetle":
                             mBugImage.setImageResource(R.drawable.beetlered);
+                            addListenerOnButton();
                             bugName = result;
                             break;
                         case "anotherAnt":
                             mBugImage.setImageResource(R.drawable.anotherant);
+                            addListenerOnButton();
                             bugName = result;
                             break;
                         case "ant":
                             mBugImage.setImageResource(R.drawable.ant);
+                            addListenerOnButton();
                             bugName = result;
                             break;
                         case "redBerry":
                             mBugImage.setImageResource(R.drawable.red);
+                            addListenerOnButton();
                             bugName = result;
                             break;
                         case "explode":
@@ -386,6 +408,24 @@ public class MainActivity extends Activity {
                 }
             }
         }
+    }
+
+
+    public void addListenerOnButton(){
+        mBugImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                bugState="newbug";
+                makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
+                new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + pos + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour + "&state=" + bugState );
+
+                mBugImage.setImageDrawable(null);
+                mBehaveImage.setImageDrawable(null);
+                bugName = "";
+                explode = "";
+                behaviour.setLength(0);
+            }
+        });
     }
 
 
