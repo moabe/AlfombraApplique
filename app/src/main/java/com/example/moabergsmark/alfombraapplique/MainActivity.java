@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
 
 
 
-    private String bugName;
+    private String bugName ="";
 
     private String explode;
 
@@ -119,12 +119,6 @@ public class MainActivity extends Activity {
     /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
-
-
-        //button
-
-
-
 
 
         //views
