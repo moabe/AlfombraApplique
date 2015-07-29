@@ -1,6 +1,7 @@
 package com.example.moabergsmark.alfombraapplique;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -41,6 +42,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +74,10 @@ public class MainActivity extends Activity {
     private NfcAdapter mNfcAdapter;
 
     private ImageButton mBugImage;
-    private ImageView mBehaveImage;
+    //private ImageView mBehaveImage;
+    private ImageView mExplosionImage;
+
+    private LinearLayout mBehaveSlots;
 
 
 
@@ -114,7 +119,7 @@ public class MainActivity extends Activity {
         Point size = new Point();
         display.getSize(size);
         Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.background),size.x,size.y,true);
+                getResources(), R.drawable.background4),size.x,size.y,true);
 
     /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
@@ -122,15 +127,27 @@ public class MainActivity extends Activity {
 
 
         //views
-
+/*
         mTextView = (TextView) findViewById(R.id.hello_id);
+        bTextView = (TextView) findViewById(R.id.bug_id);
+        beTextView = (TextView) findViewById(R.id.behav_id);*/
+
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        bTextView = (TextView) findViewById(R.id.bug_id);
-        beTextView = (TextView) findViewById(R.id.behav_id);
+
 
         mBugImage = (ImageButton) findViewById(R.id.bug_image_id);
-        mBehaveImage = (ImageView) findViewById(R.id.behave_image);
+        //mBehaveImage = (ImageView) findViewById(R.id.imageView2);
+
+        mBehaveSlots = (LinearLayout) findViewById(R.id.behave_slot);
+
+
+
+
+
+        mExplosionImage = (ImageView) findViewById(R.id.explosion);
+
 
 
 
@@ -143,12 +160,12 @@ public class MainActivity extends Activity {
             return;
 
         }
-
+/*
         if (!mNfcAdapter.isEnabled()) {
             mTextView.setText("NFC is disabled.");
         } else {
             mTextView.setText(R.string.hello_world);
-        }
+        }*/
 
         handleIntent(getIntent());
 
@@ -352,14 +369,19 @@ public class MainActivity extends Activity {
                             bugName = result;
                             break;
                         case "explode":
-                            mBehaveImage.setImageResource(R.drawable.red);
+                            mExplosionImage.setImageResource(R.drawable.red);
+                            Context c = mExplosionImage.getContext();
+
                             explode = result;
                             break;
                         case "upDown":
-                            mBehaveImage.setImageResource(R.drawable.updown);
+                            ImageView up;
+                            up = new ImageView(this);
+                            up.setImageResource(R.drawable.updown2);
+                            mBehaveSlots.addView(up);
                             behaviour.append(result).append(",");
                             break;
-                        case "rightLeft":
+                        /*case "rightLeft":
                             mBehaveImage.setImageResource(R.drawable.rightleft);
                             behaviour.append(result).append(",");
                             break;
@@ -394,9 +416,9 @@ public class MainActivity extends Activity {
                         case "zigzag":
                             mBehaveImage.setImageResource(R.drawable.rightleft);
                             behaviour.append(result).append(",");
-                            break;
+                            break;*/
                     }
-                    mTextView.setText("Beteendelista: " + behaviour);
+                    //mTextView.setText("Beteendelista: " + behaviour);
 
 
                 }
@@ -411,10 +433,11 @@ public class MainActivity extends Activity {
             public void onClick(View arg0) {
                 bugState="newbug";
                 makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
-                new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + pos + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour + "&state=" + bugState );
+                new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + pos + "?bug=" + bugName + "&exp=" + explode + "&behaviour=" + behaviour + "&state=" + bugState);
 
-                mBugImage.setImageDrawable(null);
-                mBehaveImage.setImageDrawable(null);
+                //mBugImage.setImageDrawable(null);
+                mBehaveSlots.removeAllViews();
+                mExplosionImage.setImageDrawable(null);
                 bugName = "";
                 explode = "";
                 behaviour.setLength(0);
