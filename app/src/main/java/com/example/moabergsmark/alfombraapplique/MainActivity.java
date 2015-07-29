@@ -100,12 +100,24 @@ public class MainActivity extends Activity {
     //TextView tvIsConnected;
     //EditText etResponse;//for http request
 
+    //context test
+    private static Context context;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+
         super.onCreate(savedInstanceState);
+
+        //context test
+        MainActivity.context = getApplicationContext();
+
+
 
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -173,7 +185,9 @@ public class MainActivity extends Activity {
 
 
 
-
+    public static Context getAppContext() {
+        return MainActivity.context;
+    }
 
 
 
@@ -375,48 +389,77 @@ public class MainActivity extends Activity {
                             explode = result;
                             break;
                         case "upDown":
-                            ImageView up;
-                            up = new ImageView(this);
-                            up.setImageResource(R.drawable.updown2);
-                            mBehaveSlots.addView(up);
+                            ImageView move;
+                            move = new ImageView(getAppContext());
+                            move.setImageResource(R.drawable.updown2);
+                            move.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(move);
                             behaviour.append(result).append(",");
                             break;
-                        /*case "rightLeft":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                        case "rightLeft":
+                            ImageView rl = new ImageView(getAppContext());
+                            rl.setImageResource(R.drawable.rightleft);
+                            rl.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(rl);
                             behaviour.append(result).append(",");
                             break;
                         case "circle":
-                            mBehaveImage.setImageResource(R.drawable.circle);
+                            ImageView k = new ImageView(getAppContext());
+                            k.setImageResource(R.drawable.circle);
+                            k.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(k);
                             behaviour.append(result).append(",");
                             break;
                         case "up":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView up = new ImageView(getAppContext());
+                            up.setImageResource(R.drawable.up);
+                            up.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(up);
                             behaviour.append(result).append(",");
                             break;
                         case "down":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView d;
+                            d = new ImageView(getAppContext());
+                            d.setImageResource(R.drawable.down);
+                            d.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(d);
                             behaviour.append(result).append(",");
                             break;
                         case "right":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView right = new ImageView(getAppContext());
+                            right.setImageResource(R.drawable.right);
+                            right.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(right);
                             behaviour.append(result).append(",");
                             break;
                         case "left":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView left = new ImageView(getAppContext());
+                            left.setImageResource(R.drawable.left);
+                            left.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(left);
                             behaviour.append(result).append(",");
                             break;
                         case "lu":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView lu = new ImageView(getAppContext());
+                            lu.setImageResource(R.drawable.lu);
+                            lu.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(lu);
                             behaviour.append(result).append(",");
                             break;
                         case "rd":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView rd = new ImageView(getAppContext());
+                            rd.setImageResource(R.drawable.rd);
+                            rd.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(rd);
                             behaviour.append(result).append(",");
                             break;
                         case "zigzag":
-                            mBehaveImage.setImageResource(R.drawable.rightleft);
+                            ImageView zz = new ImageView(getAppContext());
+                            zz.setImageResource(R.drawable.zigzag);
+                            zz.setAdjustViewBounds(true);
+                            mBehaveSlots.addView(zz);
                             behaviour.append(result).append(",");
-                            break;*/
+                            break;
                     }
                     //mTextView.setText("Beteendelista: " + behaviour);
 
@@ -435,7 +478,7 @@ public class MainActivity extends Activity {
                 makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
                 new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + pos + "?bug=" + bugName + "&exp=" + explode + "&behaviour=" + behaviour + "&state=" + bugState);
 
-                //mBugImage.setImageDrawable(null);
+                mBugImage.setImageDrawable(null);
                 mBehaveSlots.removeAllViews();
                 mExplosionImage.setImageDrawable(null);
                 bugName = "";
