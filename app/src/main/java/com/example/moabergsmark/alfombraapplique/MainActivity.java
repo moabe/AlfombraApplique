@@ -339,8 +339,8 @@ public class MainActivity extends Activity {
         protected void onPostExecute(String result) {
 
             if (result != null) {
-                if(result.matches("^-?\\d+$")) {
-                    //Log.d("string is int ", result );
+                if(result.matches("(\\d+):(\\d+)")){
+                    Log.d("string is int ", result );
                     bugState="preview";
                     pos = result;
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + result + "?bug=" + bugName  + "&state=" + bugState );
@@ -383,9 +383,7 @@ public class MainActivity extends Activity {
                             bugName = result;
                             break;
                         case "explode":
-                            mExplosionImage.setImageResource(R.drawable.red);
-                            Context c = mExplosionImage.getContext();
-
+                            mExplosionImage.setImageResource(R.drawable.explosion);
                             explode = result;
                             break;
                         case "upDown":
