@@ -361,26 +361,55 @@ public class MainActivity extends Activity {
                             mBugImage.setImageResource(R.drawable.beetlegreen);
                             addListenerOnButton();
                             bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "redBeetle":
                             mBugImage.setImageResource(R.drawable.beetlered);
                             addListenerOnButton();
                             bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "anotherAnt":
                             mBugImage.setImageResource(R.drawable.anotherant);
                             addListenerOnButton();
                             bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "ant":
                             mBugImage.setImageResource(R.drawable.ant);
                             addListenerOnButton();
                             bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "redBerry":
                             mBugImage.setImageResource(R.drawable.red);
                             addListenerOnButton();
                             bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            break;
+                        case "grass1":
+                            mBugImage.setImageResource(R.drawable.grass1);
+                            addListenerOnButton();
+                            bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            break;
+                        case "grass2":
+                            mBugImage.setImageResource(R.drawable.grass2);
+                            addListenerOnButton();
+                            bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
+                            break;
+                        case "grass3":
+                            mBugImage.setImageResource(R.drawable.grass3);
+                            addListenerOnButton();
+                            bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName + "&state=" + bugState);
+                            break;
+                        case "grass4":
+                            mBugImage.setImageResource(R.drawable.grass4);
+                            addListenerOnButton();
+                            bugName = result;
+                            new HttpAsyncTask().execute("http://192.168.1.2:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
                             break;
                         case "explode":
                             mExplosionImage.setImageResource(R.drawable.explosion);
@@ -482,6 +511,7 @@ public class MainActivity extends Activity {
                 bugName = "";
                 explode = "";
                 behaviour.setLength(0);
+                bugState="preview";
             }
         });
     }
