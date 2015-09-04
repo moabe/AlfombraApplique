@@ -473,7 +473,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 bugState="newbug";
-                makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
+                //makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
                 new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + pos + "?bug=" + bugName + "&exp=" + explode + "&behaviour=" + behaviour + "&state=" + bugState);
 
                 mBugImage.setImageDrawable(null);
