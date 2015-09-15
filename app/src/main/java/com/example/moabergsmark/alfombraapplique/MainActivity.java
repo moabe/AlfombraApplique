@@ -92,6 +92,9 @@ public class MainActivity extends Activity {
     private String pos;
 
 
+    private String adress;
+
+
     // private String behaviour = "";
 
     private StringBuilder behaviour = new StringBuilder("");
@@ -136,6 +139,11 @@ public class MainActivity extends Activity {
     /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
+
+
+        //variable
+
+        adress = "http://192.168.1.2:8080/";
 
 
         //views
@@ -343,7 +351,7 @@ public class MainActivity extends Activity {
                     Log.d("string is int ", result );
                     bugState="preview";
                     pos = result;
-                    new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + result + "?bug=" + bugName  + "&state=" + bugState );
+                    new HttpAsyncTask().execute(adress+"pre/" + result + "?bug=" + bugName  + "&state=" + bugState );
                     /*
                     new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + result + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour + "&state=" + bugName );
 
@@ -361,55 +369,55 @@ public class MainActivity extends Activity {
                             mBugImage.setImageResource(R.drawable.beetlegreen);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "redBeetle":
                             mBugImage.setImageResource(R.drawable.beetlered);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            new HttpAsyncTask().execute(adress+"pre/"+ pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "anotherAnt":
                             mBugImage.setImageResource(R.drawable.anotherant);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "ant":
                             mBugImage.setImageResource(R.drawable.ant);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "redBerry":
                             mBugImage.setImageResource(R.drawable.red);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "grass1":
                             mBugImage.setImageResource(R.drawable.grass1);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "grass2":
                             mBugImage.setImageResource(R.drawable.grass2);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
                             break;
                         case "grass3":
                             mBugImage.setImageResource(R.drawable.grass3);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName + "&state=" + bugState);
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName + "&state=" + bugState);
                             break;
                         case "grass4":
                             mBugImage.setImageResource(R.drawable.grass4);
                             addListenerOnButton();
                             bugName = result;
-                            new HttpAsyncTask().execute("http://192.168.1.7:8080/pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
                             break;
                         case "explode":
                             mExplosionImage.setImageResource(R.drawable.explosion);
@@ -503,7 +511,7 @@ public class MainActivity extends Activity {
             public void onClick(View arg0) {
                 bugState="newbug";
                 //makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
-                new HttpAsyncTask().execute("http://192.168.1.7:8080/pos/" + pos + "?bug=" + bugName + "&exp=" + explode + "&behaviour=" + behaviour + "&state=" + bugState);
+                new HttpAsyncTask().execute(adress + "pos/" + pos + "?bug=" + bugName + "&exp=" + explode + "&behaviour=" + behaviour + "&state=" + bugState);
 
                 mBugImage.setImageDrawable(null);
                 mBehaveSlots.removeAllViews();
