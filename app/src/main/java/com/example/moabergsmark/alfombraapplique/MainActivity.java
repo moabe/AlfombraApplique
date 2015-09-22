@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
         Point size = new Point();
         display.getSize(size);
         Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.background4),size.x,size.y,true);
+                getResources(), R.drawable.emptybackground),size.x,size.y,true);
 
     /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
 
 
 
-        mExplosionImage = (ImageView) findViewById(R.id.explosion);
+        //mExplosionImage = (ImageView) findViewById(R.id.explosion);
 
 
 
