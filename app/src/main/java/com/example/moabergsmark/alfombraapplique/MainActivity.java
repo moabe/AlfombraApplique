@@ -80,6 +80,9 @@ public class MainActivity extends Activity {
     private LinearLayout mBehaveSlots;
 
 
+    private ImageView mBugCircle;
+
+
 
 
     private String bugName ="";
@@ -110,6 +113,8 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
 
 
 
@@ -161,6 +166,17 @@ public class MainActivity extends Activity {
         //mBehaveImage = (ImageView) findViewById(R.id.imageView2);
 
         mBehaveSlots = (LinearLayout) findViewById(R.id.behave_slot);
+
+
+
+        mBugCircle = (ImageView) findViewById(R.id.bug_circle);
+
+
+        ImageView move;
+        move = new ImageView(getAppContext());
+        move.setImageResource(R.drawable.movementactive);
+        move.setAdjustViewBounds(true);
+        mBehaveSlots.addView(move);
 
 
 
@@ -391,12 +407,15 @@ public class MainActivity extends Activity {
                             break;
                         case "redBerry":
                             mBugImage.setImageResource(R.drawable.red);
+
                             addListenerOnButton();
                             bugName = result;
                             new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
                             break;
                         case "grass1":
                             mBugImage.setImageResource(R.drawable.grass1);
+                            mBugCircle.setImageResource(R.drawable.circelcatch);
+
                             addListenerOnButton();
                             bugName = result;
                             new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
@@ -515,7 +534,8 @@ public class MainActivity extends Activity {
 
                 mBugImage.setImageDrawable(null);
                 mBehaveSlots.removeAllViews();
-                mExplosionImage.setImageDrawable(null);
+                mBugCircle.setImageResource(R.drawable.circelmarked);
+                //mExplosionImage.setImageDrawable(null);
                 bugName = "";
                 explode = "";
                 behaviour.setLength(0);
