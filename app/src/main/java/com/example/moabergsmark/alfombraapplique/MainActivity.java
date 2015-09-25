@@ -172,14 +172,6 @@ public class MainActivity extends Activity {
         mBugCircle = (ImageView) findViewById(R.id.bug_circle);
 
 
-        ImageView move;
-        move = new ImageView(getAppContext());
-        move.setImageResource(R.drawable.movementactive);
-        move.setAdjustViewBounds(true);
-        mBehaveSlots.addView(move);
-
-
-
 
 
         //mExplosionImage = (ImageView) findViewById(R.id.explosion);
@@ -519,6 +511,7 @@ public class MainActivity extends Activity {
 
 
                 }
+                fillMove();
             }
         }
     }
@@ -542,6 +535,29 @@ public class MainActivity extends Activity {
                 bugState="preview";
             }
         });
+    }
+
+
+
+    public void fillMove(){
+
+        String[] behaveList = behaviour.toString().split(",");
+
+        for(String m : behaveList) {
+            Log.d("move", m);
+        }
+
+        ImageView left = new ImageView(getAppContext());
+        left.setImageResource(R.drawable.left);
+        left.setAdjustViewBounds(true);
+        mBehaveSlots.addView(left);
+
+        ImageView lu = new ImageView(getAppContext());
+        lu.setImageResource(R.drawable.lu);
+        lu.setAdjustViewBounds(true);
+        mBehaveSlots.addView(lu);
+
+
     }
 
 

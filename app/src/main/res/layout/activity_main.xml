@@ -66,7 +66,7 @@
                 android:layout_alignParentStart="true"
                 android:src="@drawable/behaveslots"
                 android:adjustViewBounds="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp" />
 
             <LinearLayout
@@ -95,8 +95,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    >
+                    android:layout_weight="2">
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
