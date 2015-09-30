@@ -7,14 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
-
-
-
 
 
 import java.io.BufferedReader;
@@ -28,10 +22,6 @@ import java.util.Arrays;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.IntentFilter.MalformedMimeTypeException;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -39,12 +29,10 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import org.apache.http.HttpResponse;
@@ -170,6 +158,13 @@ public class MainActivity extends Activity {
 
 
         mBugCircle = (ImageView) findViewById(R.id.bug_circle);
+
+
+
+        ImageView ma = new ImageView(getAppContext());
+        ma.setImageResource(R.drawable.mactive);
+        ma.setAdjustViewBounds(true);
+        mBehaveSlots.addView(ma);
 
 
 
@@ -406,8 +401,7 @@ public class MainActivity extends Activity {
                             break;
                         case "grass1":
                             mBugImage.setImageResource(R.drawable.grass1);
-                            mBugCircle.setImageResource(R.drawable.circelcatch);
-
+                            mBugCircle.setImageResource(R.drawable.circelcatch);//when a figure is scanned make the circle in an other color.
                             addListenerOnButton();
                             bugName = result;
                             new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
@@ -437,7 +431,7 @@ public class MainActivity extends Activity {
                         case "upDown":
                             ImageView move;
                             move = new ImageView(getAppContext());
-                            move.setImageResource(R.drawable.updown2);
+                            move.setImageResource(R.drawable.updown);
                             move.setAdjustViewBounds(true);
                             mBehaveSlots.addView(move);
                             behaviour.append(result).append(",");
@@ -533,6 +527,10 @@ public class MainActivity extends Activity {
                 explode = "";
                 behaviour.setLength(0);
                 bugState="preview";
+                ImageView ma = new ImageView(getAppContext());
+                ma.setImageResource(R.drawable.mactive);
+                ma.setAdjustViewBounds(true);
+                mBehaveSlots.addView(ma);
             }
         });
     }
@@ -540,22 +538,28 @@ public class MainActivity extends Activity {
 
 
     public void fillMove(){
+        mBehaveSlots.removeAllViews();
 
         String[] behaveList = behaviour.toString().split(",");
 
         for(String m : behaveList) {
             Log.d("move", m);
+            String imageName = m.toLowerCase();
+            ImageView move = new ImageView(getAppContext());
+            int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
+
+            Log.d("redid", Integer.toString(resID));
+            move.setImageResource(resID);
+            move.setAdjustViewBounds(true);
+            mBehaveSlots.addView(move);
         }
 
-        ImageView left = new ImageView(getAppContext());
-        left.setImageResource(R.drawable.left);
-        left.setAdjustViewBounds(true);
-        mBehaveSlots.addView(left);
 
-        ImageView lu = new ImageView(getAppContext());
-        lu.setImageResource(R.drawable.lu);
-        lu.setAdjustViewBounds(true);
-        mBehaveSlots.addView(lu);
+
+        ImageView ma = new ImageView(getAppContext());
+        ma.setImageResource(R.drawable.mactive);
+        ma.setAdjustViewBounds(true);
+        mBehaveSlots.addView(ma);
 
 
     }
