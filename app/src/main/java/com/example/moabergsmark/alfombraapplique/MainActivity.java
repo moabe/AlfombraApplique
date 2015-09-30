@@ -97,6 +97,8 @@ public class MainActivity extends Activity {
     //context test
     private static Context context;
 
+    private String figures = "greenBeetle redBeetle anotherAnt ant redBerry grass1 grass2 grass3 grass4";
+    private String movement = "upDown rightLeft circle up down right left lu rd zigzag";
 
 
     @Override
@@ -355,155 +357,34 @@ public class MainActivity extends Activity {
                     bugState="preview";
                     pos = result;
                     new HttpAsyncTask().execute(adress+"pre/" + result + "?bug=" + bugName  + "&state=" + bugState );
-                    /*
-                    new HttpAsyncTask().execute("http://192.168.1.2:8080/pos/" + result + "?bug=" + bugName + "&exp=" + explode +"&behaviour=" + behaviour + "&state=" + bugName );
-
-                    mBugImage.setImageDrawable(null);
-                    mBehaveImage.setImageDrawable(null);
-                    bugName = "";
-                    explode = "";
-                    behaviour.setLength(0);*/
-
 
                 }
                 else{
-                    switch (result) {
-                        case "greenBeetle":
-                            mBugImage.setImageResource(R.drawable.beetlegreen);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
-                            break;
-                        case "redBeetle":
-                            mBugImage.setImageResource(R.drawable.beetlered);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/"+ pos + "?bug=" + bugName  + "&state=" + bugState );
-                            break;
-                        case "anotherAnt":
-                            mBugImage.setImageResource(R.drawable.anotherant);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
-                            break;
-                        case "ant":
-                            mBugImage.setImageResource(R.drawable.ant);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
-                            break;
-                        case "redBerry":
-                            mBugImage.setImageResource(R.drawable.red);
+                    if (figures.contains(result)){
+                        String imageName = result.toLowerCase();
+                        int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
+                        mBugImage.setImageResource(resID);
+                        addListenerOnButton();
+                        mBugCircle.setImageResource(R.drawable.circelcatch);//when a figure is scanned make the circle in an other color.
+                        bugName = result;
+                        new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
 
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
-                            break;
-                        case "grass1":
-                            mBugImage.setImageResource(R.drawable.grass1);
-                            mBugCircle.setImageResource(R.drawable.circelcatch);//when a figure is scanned make the circle in an other color.
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
-                            break;
-                        case "grass2":
-                            mBugImage.setImageResource(R.drawable.grass2);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
-                            break;
-                        case "grass3":
-                            mBugImage.setImageResource(R.drawable.grass3);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName + "&state=" + bugState);
-                            break;
-                        case "grass4":
-                            mBugImage.setImageResource(R.drawable.grass4);
-                            addListenerOnButton();
-                            bugName = result;
-                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState);
-                            break;
-                        case "explode":
-                            mExplosionImage.setImageResource(R.drawable.explosion);
-                            explode = result;
-                            break;
-                        case "upDown":
-                            ImageView move;
-                            move = new ImageView(getAppContext());
-                            move.setImageResource(R.drawable.updown);
-                            move.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(move);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "rightLeft":
-                            ImageView rl = new ImageView(getAppContext());
-                            rl.setImageResource(R.drawable.rightleft);
-                            rl.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(rl);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "circle":
-                            ImageView k = new ImageView(getAppContext());
-                            k.setImageResource(R.drawable.circle);
-                            k.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(k);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "up":
-                            ImageView up = new ImageView(getAppContext());
-                            up.setImageResource(R.drawable.up);
-                            up.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(up);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "down":
-                            ImageView d;
-                            d = new ImageView(getAppContext());
-                            d.setImageResource(R.drawable.down);
-                            d.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(d);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "right":
-                            ImageView right = new ImageView(getAppContext());
-                            right.setImageResource(R.drawable.right);
-                            right.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(right);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "left":
-                            ImageView left = new ImageView(getAppContext());
-                            left.setImageResource(R.drawable.left);
-                            left.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(left);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "lu":
-                            ImageView lu = new ImageView(getAppContext());
-                            lu.setImageResource(R.drawable.lu);
-                            lu.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(lu);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "rd":
-                            ImageView rd = new ImageView(getAppContext());
-                            rd.setImageResource(R.drawable.rd);
-                            rd.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(rd);
-                            behaviour.append(result).append(",");
-                            break;
-                        case "zigzag":
-                            ImageView zz = new ImageView(getAppContext());
-                            zz.setImageResource(R.drawable.zigzag);
-                            zz.setAdjustViewBounds(true);
-                            mBehaveSlots.addView(zz);
-                            behaviour.append(result).append(",");
-                            break;
                     }
-                    //mTextView.setText("Beteendelista: " + behaviour);
 
+                    if (movement.contains(result)){
+                        ImageView move;
+                        move = new ImageView(getAppContext());
 
+                        String imageName = result.toLowerCase();
+
+                        int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
+
+                        move.setImageResource(resID);
+                        move.setAdjustViewBounds(true);
+                        mBehaveSlots.addView(move);
+                        behaviour.append(result).append(",");
+
+                    }
                 }
                 fillMove();
             }
@@ -543,12 +424,10 @@ public class MainActivity extends Activity {
         String[] behaveList = behaviour.toString().split(",");
 
         for(String m : behaveList) {
-            Log.d("move", m);
             String imageName = m.toLowerCase();
             ImageView move = new ImageView(getAppContext());
             int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
 
-            Log.d("redid", Integer.toString(resID));
             move.setImageResource(resID);
             move.setAdjustViewBounds(true);
             mBehaveSlots.addView(move);
