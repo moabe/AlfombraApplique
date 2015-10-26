@@ -29,6 +29,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,14 +69,30 @@ public class MainActivity extends Activity {
     private LinearLayout mBehaveSlots;
 
 
+    private FrameLayout mRelation;
+
+    ///private ImageView mRelationMark;
+
     private ImageView mBugCircle;
+
+    private ImageView mIntsectRelationCircle;
+
+
+    private ImageView mInsectRelationImage;
+
+    private ImageView mRelationImage;
+
 
 
 
 
     private String bugName ="";
 
-    private String explode;
+    private String targetInsect = "";
+
+    private String relationTarget = "";
+
+
 
     private String bugState;
 
@@ -99,7 +116,11 @@ public class MainActivity extends Activity {
 
     private String figures = "greenBeetle redBeetle anotherAnt ant redBerry grass1 grass2 grass3 grass4";
     private String movement = "upDown rightLeft circle up down right left lu rd zigzag";
+    private String relation = "explode";
 
+
+
+    private Boolean figure_choose = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +183,7 @@ public class MainActivity extends Activity {
         mBugCircle = (ImageView) findViewById(R.id.bug_circle);
 
 
-
+        //green square for the begining
         ImageView ma = new ImageView(getAppContext());
         ma.setImageResource(R.drawable.mactive);
         ma.setAdjustViewBounds(true);
@@ -171,7 +192,21 @@ public class MainActivity extends Activity {
 
 
 
-        //mExplosionImage = (ImageView) findViewById(R.id.explosion);
+        //mRelationMark = (ImageView) findViewById(R.id.relation_marked);
+
+
+        mIntsectRelationCircle = (ImageView) findViewById(R.id.insect_relation_circle);
+
+
+        mInsectRelationImage = (ImageView) findViewById(R.id.insect_relation);
+
+
+
+        mRelationImage = (ImageView) findViewById(R.id.relation_id);
+
+
+
+        //mExplosionImage = (ImageView) findViewById(R.id.explode);
 
 
 
@@ -361,13 +396,36 @@ public class MainActivity extends Activity {
                 }
                 else{
                     if (figures.contains(result)){
-                        String imageName = result.toLowerCase();
-                        int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
-                        mBugImage.setImageResource(resID);
-                        addListenerOnButton();
-                        mBugCircle.setImageResource(R.drawable.circelcatch);//when a figure is scanned make the circle in an other color.
-                        bugName = result;
-                        new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+
+                        if (figure_choose == true){
+                            String imageName = result.toLowerCase();
+                            int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
+                            mBugImage.setImageResource(resID);
+                            addListenerOnButton();
+                            //mBugCircle.setImageResource(R.drawable.circelcatch);//when a figure is scanned make the circle in an other color.
+                            bugName = result;
+                            new HttpAsyncTask().execute(adress+"pre/" + pos + "?bug=" + bugName  + "&state=" + bugState );
+
+                        }
+
+                        else{
+                            String imageName = result.toLowerCase();
+                            int resID = getResources().getIdentifier(imageName, "drawable", "com.example.moabergsmark.alfombraapplique");
+                            mInsectRelationImage.setImageResource(resID);
+
+                            mIntsectRelationCircle.setImageResource(R.drawable.insectchoosen);
+
+
+                            mBugCircle.setImageResource(R.drawable.circelmarked);
+
+
+
+                            targetInsect = result;
+
+
+                            figure_choose = true;
+
+                        }
 
                     }
 
@@ -383,8 +441,45 @@ public class MainActivity extends Activity {
                         move.setAdjustViewBounds(true);
                         mBehaveSlots.addView(move);
                         behaviour.append(result).append(",");
+                    }
+                    if (relation.contains(result)){
+
+                        String imageName = result.toLowerCase();
+
+                        int resID=getResources().getIdentifier(imageName,"drawable", "com.example.moabergsmark.alfombraapplique");
+
+                        mRelationImage.setImageResource(resID);
+                        mRelationImage.setAdjustViewBounds(true);
+
+
+
+
+                        //make little circle active and the other one as unactive
+                        //dotted if it is empty and black line if
+
+                        mIntsectRelationCircle.setImageResource(R.drawable.insectmarked);
+
+                        if (bugName == ""){
+
+                            mBugCircle.setImageResource(R.drawable.circelplace);
+                        }
+                        else   {
+                            mBugCircle.setImageResource(R.drawable.circelcatch);
+                        }
+                        Log.d(bugName, "bugname");
+
+                        figure_choose = false;
+
+                        relationTarget = result;
+
+
+
+
+                        //set some kind
 
                     }
+
+
                 }
                 fillMove();
             }
@@ -398,14 +493,23 @@ public class MainActivity extends Activity {
             public void onClick(View arg0) {
                 bugState="newbug";
                 //makeText(MainActivity.this, "du har tryckt på bildknappen", LENGTH_SHORT).show();
-                new HttpAsyncTask().execute(adress + "pos/" + pos + "?bug=" + bugName + "&exp=" + explode + "&behaviour=" + behaviour + "&state=" + bugState);
+                new HttpAsyncTask().execute(adress + "pos/" + pos + "?bug=" + bugName + "&relation=" + relationTarget + "&tinsect=" + targetInsect + "&behaviour=" + behaviour + "&state=" + bugState);
 
                 mBugImage.setImageDrawable(null);
                 mBehaveSlots.removeAllViews();
                 mBugCircle.setImageResource(R.drawable.circelmarked);
                 //mExplosionImage.setImageDrawable(null);
+                mRelationImage.setImageDrawable(null);
+                mInsectRelationImage.setImageDrawable(null);
+                mIntsectRelationCircle.setImageResource(R.drawable.insectplace);
+
+
                 bugName = "";
-                explode = "";
+                targetInsect = "";
+                relationTarget = "";
+
+                figure_choose = true;//make next figure end up in net if no target was scanned the prev time.
+
                 behaviour.setLength(0);
                 bugState="preview";
                 ImageView ma = new ImageView(getAppContext());
