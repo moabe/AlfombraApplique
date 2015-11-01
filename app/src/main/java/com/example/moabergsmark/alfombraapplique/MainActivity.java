@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
 
     private String figures = "greenBeetle redBeetle anotherAnt ant redBerry grass1 grass2 grass3 grass4";
     private String movement = "upDown rightLeft circle up down right left lu rd zigzag";
-    private String relation = "explode";
+    private String relation = "explode carry";
 
 
 
@@ -206,7 +206,7 @@ public class MainActivity extends Activity {
 
 
 
-        //mExplosionImage = (ImageView) findViewById(R.id.explode);
+        //mExplosionImage = (ImageView) findViewById(R.id.explode2);
 
 
 
